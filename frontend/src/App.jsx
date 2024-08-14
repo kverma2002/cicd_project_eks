@@ -12,6 +12,9 @@ import {
 
 import ListItem from "@/components/ui/list-item"
 import { components } from "@/constants/components"
+import { Route, Routes } from "react-router-dom"
+import Home from "./pages/home"
+import Converter from "./pages/converter"
 
 function App() {
   
@@ -43,8 +46,10 @@ function App() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <h1 className="text-4xl font-bold dark:text-white" >Your Own File Converter</h1>
-      <p> Host your own file converter locally or on the cloud to make sure your files are secure.</p>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/converter" element={<Converter/>} />
+      </Routes>
 
     </div>
   )
