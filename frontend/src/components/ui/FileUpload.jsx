@@ -1,19 +1,18 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-const FileUpload = ({ onFileUpload }) => {
+const FileUpload = ({ onFilesUpload }) => {
   const onDrop = useCallback((acceptedFiles) => {
-    // Handle the file upload here
-    onFileUpload(acceptedFiles);
-  }, [onFileUpload]);
+    // Pass the uploaded files to the parent component
+    onFilesUpload(acceptedFiles);
+  }, [onFilesUpload]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    multiple: false, // Set to true if you want to allow multiple file uploads
+    multiple: true, // Allow multiple file uploads
     accept: {
-      'image/*': ['.jpeg', '.jpg', '.png'],
-      'application/pdf': ['.pdf'],
-      // Add more file types if needed
+      'image/*': [],
+      'video/*': [],
     },
   });
 
