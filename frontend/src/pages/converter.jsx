@@ -50,19 +50,34 @@ function Converter() {
       }
     };
 
+    const handleDeleteFile = (indexToDelete) => {
+      setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToDelete));
+  };
+
 
     return (
-        <div className="p-6 bg-white dark:bg-black rounded-md shadow-md">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">Converter</h1>
+      <div className="bg-white dark:bg-black flex-col justify-center">
+          <h1 className="text-center text-2xl md:text-3xl lg:text-4xl md:m-6 lg:m-10 font-bold text-gray-900 dark:text-gray-100 px-10 sm:px-6">File Converter</h1>
+          <p className="text-center text-sm md:text-base lg:text-lg text-gray-900 dark:text-gray-200 max-w-2xl mx-auto">
+            Upload files to convert them to a different format. Supported formats are: <br />
+            <span className="text-blue-500 dark:text-blue-300">
+              Image: png, jpeg, jpg, gif, webp, tiff, tif, heif, heic, avif, svg, raw <br />
+            </span>
+            <span className="text-green-500 dark:text-green-300">
+              {' '}Video: mp4, mov, wmv, avi, mkv, flv, webm, mpeg, mpg
+            </span>
+          </p>
           {files.length === 0 && (
             <>
-              <p className="mt-2 text-gray-700 dark:text-gray-300">Upload files to convert them to a different format.</p>
               <FileUpload onFilesUpload={handleFilesUpload} />
             </>
           )}
           {files.length > 0 && (
-            <>
-              <StagedFiles files={files} onFormatChange={handleFormatChange} />
+            <div className="flex flex-col justify-center items-center w-full ">
+              <StagedFiles 
+                files={files} 
+                onFormatChange={handleFormatChange} 
+                onDelete={handleDeleteFile} />
               <Button onClick={clearFiles} className="mt-4"> Clear Files </Button>
               <Button onClick={handleConvertFiles} className="mt-4"> Convert Files </Button>
                       {downloadUrl && (
@@ -70,7 +85,7 @@ function Converter() {
                   Download Converted Files
                 </a>
               )}
-            </>
+            </div>
           )}
           
         </div>

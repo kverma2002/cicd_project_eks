@@ -54,6 +54,7 @@ uploadRouter.post('/', upload.array('files'), async (req, res) => {
         }
         // Remove the original uploaded file
         fs.unlinkSync(file.path);
+        
         return outputFilePath;
       })
     );

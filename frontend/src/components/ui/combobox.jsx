@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -38,20 +38,23 @@ export function Combobox({ currentFormat, onFormatChange }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[128px] justify-between flex"
         >
-          {value
-            ? formatsList.find((format) => format.value === value)?.label
-            : "Select format..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <span className="">
+            {value
+              ? formatsList.find((format) => format.value === value)?.label
+              : "Select format..."}
+          </span>
+          <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search formats..." />
+          {/* <CommandInput placeholder="Search formats..." /> */}
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
+              <div className="grid grid-cols-3 gap-2">
               {formatsList.map((format) => (
                 <CommandItem
                   key={format.value}
@@ -71,6 +74,7 @@ export function Combobox({ currentFormat, onFormatChange }) {
                   {format.label}
                 </CommandItem>
               ))}
+              </div>
             </CommandGroup>
           </CommandList>
         </Command>
