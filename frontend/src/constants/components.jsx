@@ -7,15 +7,9 @@ export const components = [
     },
     {
       title: "Compress",
-      href: "/compresser",
+      href: "/compressor",
       description:
         "Compression of images and videos to reduce file size.",
-    },
-    {
-      title: "PDF Combiner",
-      href: "/pdf-combiner",
-      description:
-        "Combine multiple PDFs into one.",
     },
   ];
 
@@ -45,28 +39,8 @@ export const components = [
       label: "tiff",
     },
     {
-      value: "tif",
-      label: "tif",
-    },
-    {
-      value: "heif",
-      label: "heif",
-    },
-    {
-      value: "heic",
-      label: "heic",
-    },
-    {
       value: "avif",
       label: "avif",
-    },
-    {
-      value: "svg",
-      label: "svg",
-    },
-    {
-      value: "raw",
-      label: "raw",
     },
   ]
   

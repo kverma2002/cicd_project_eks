@@ -3,13 +3,15 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import StagedFiles from '@/components/ui/StagedFiles';
 import { uploadFiles } from "@/api/converterapi";
-
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 function Converter() {
 
     const [files, setFiles] = useState([]);
     const [downloadUrl, setDownloadUrl] = useState(null);
     const [downloading, setDownloading] = useState(false);
+    const [error, setError] = useState(null);
+    const [errorInfo, setErrorInfo] = useState(null);
 
     const handleFilesUpload = (uploadedFiles) => {
         // Initialize each file with a default format selection
@@ -47,29 +49,51 @@ function Converter() {
         console.log('Files uploaded successfully, download URL created');
       } catch (error) {
         console.error('Error converting files:', error);
-        // Handle the error, such as showing an error message
+        setError('There was an error converting the files. Please try again.');
+        setErrorInfo(error.message);
       }
       setDownloading(false);
     };
 
-    const handleDeleteFile = (indexToDelete) => {
-      setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToDelete));
+  const handleDeleteFile = (indexToDelete) => {
+    setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToDelete));
   };
+
+  const closeAlert = () => {
+    setError(null);
+    setErrorInfo(null);
+  }
 
 
     return (
-      <div className="bg-white dark:bg-black flex-col justify-center">
+      <div className="flex-col justify-center dark:bg-slate-950">
           <div className="space-y-6">
-            <h1 className="text-center text-2xl md:text-3xl lg:text-4xl md:m-6 lg:m-10 font-bold text-gray-900 dark:text-gray-100 px-10 sm:px-6">File Converter</h1>
+            <h1 className="text-center text-2xl md:text-3xl lg:text-4xl md:m-6 lg:m-10 text-gray-900 dark:text-gray-100 px-10 sm:px-6">
+              Your Own File Converter
+            </h1>
             <p className="text-center text-sm md:text-base lg:text-lg text-gray-900 dark:text-gray-200 max-w-2xl mx-auto">
               Upload files to convert them to a different format. Supported formats are: <br />
               <span className="text-blue-500 dark:text-blue-300">
-                Image: png, jpeg, jpg, gif, webp, tiff, tif, heif, heic, avif, svg, raw <br />
+                Image: png, jpeg, jpg, gif, webp, tiff, avif, raw <br />
               </span>
               <span className="text-green-500 dark:text-green-300">
                 {' '}Video: mp4, mov, wmv, avi, mkv, flv, webm, mpeg, mpg
               </span>
             </p>
+            
+            {error && (
+              <div className="flex justify-center">
+                <div className="w-full max-w-md">
+                  <Alert variant="destructive">
+                    <AlertTitle>{error}</AlertTitle>
+                    <AlertDescription>{errorInfo}</AlertDescription>
+                    <Button variant="ghost" onClick={closeAlert}>
+                      Dismiss
+                    </Button>
+                  </Alert>
+                </div>
+              </div>
+            )}
           </div>
           {files.length === 0 && (
             <>
@@ -92,6 +116,20 @@ function Converter() {
                   <a href={downloadUrl} download="converted_files.zip" className="m-4">
                     <Button>
                       Download
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-5 h-5 ml-2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 4.5v11.25m0 0L8.25 12.75m3.75 3.75L15.75 12.75M4.5 15.75V18a2.25 2.25 0 002.25 2.25h10.5A2.25 2.25 0 0019.5 18v-2.25"
+                        />
+                      </svg>
                     </Button>
                   </a>
                 )}

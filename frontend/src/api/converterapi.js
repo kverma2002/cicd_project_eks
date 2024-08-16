@@ -11,7 +11,7 @@ export const uploadFiles = async (formData) => {
     if (!response.ok) {
       const errorMessage = await response.text(); // Read the response as text for the error message
       console.error('Error:', errorMessage);
-      throw new Error(`Error: ${response.statusText}`);
+      throw new Error(`Error: ${response.status} - ${errorMessage}`);
     }
 
     // Handle the response as a blob (binary data)

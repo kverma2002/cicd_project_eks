@@ -32,29 +32,29 @@ uploadRouter.post('/', upload.array('files'), async (req, res) => {
     const convertedFiles = await Promise.all(
       files.map(async (file, index) => {
         const outputFilePath = path.join('converted', `${path.parse(file.originalname).name}.${formats[index]}`);
-        console.log('Files:', files[index].originalname);
-        console.log('Format:', formats[index]);
-        console.log('Mimetype:', file.mimetype);
+        try {
 
-        if (file.mimetype.startsWith('video')) {
-          await new Promise((resolve, reject) => {
-            ffmpeg(file.path)
-              .output(outputFilePath)
-              .format(formats[index])
-              .on('end', () => resolve())
-              .on('error', (err) => reject(err))
-              .run();
-          });
-        } else if (file.mimetype.startsWith('image')) {
-          await sharp(file.path)
-            .toFormat(formats[index])
-            .toFile(outputFilePath);
-        } else {  
-          throw new Error('Unsupported file type');
+
+          if (file.mimetype.startsWith('video')) {
+            await new Promise((resolve, reject) => {
+              ffmpeg(file.path)
+                .output(outputFilePath)
+                .format(formats[index])
+                .on('end', () => resolve())
+                .on('error', (err) => reject(err))
+                .run();
+            });
+          } else if (file.mimetype.startsWith('image')) {
+            console.log('Image Format:', formats[index]);
+            await sharp(file.path)
+              .toFormat(formats[index])
+              .toFile(outputFilePath);
+          } else {  
+            throw new Error('Unsupported file type');
+          }
+        } finally {
+          fs.unlinkSync(file.path);
         }
-        // Remove the original uploaded file
-        fs.unlinkSync(file.path);
-        
         return outputFilePath;
       })
     );

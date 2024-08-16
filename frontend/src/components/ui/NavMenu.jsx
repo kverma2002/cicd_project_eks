@@ -32,7 +32,7 @@ import {
         <NavigationMenu className="dark:text-white ">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+              <NavigationMenuTrigger>Tools</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[130px] gap-3 p-4 md:w-[330px] lg:w-[330px] ">
                   {components.map((component) => (
