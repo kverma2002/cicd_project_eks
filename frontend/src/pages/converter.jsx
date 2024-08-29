@@ -23,10 +23,10 @@ function Converter() {
     };
     
     const handleFormatChange = (index, newFormat) => {
-        const updatedFiles = files.map((fileItem, i) =>
-            i === index ? { ...fileItem, format: newFormat } : fileItem
-        );
-        setFiles(updatedFiles);
+      const updatedFiles = files.map((fileItem, i) =>
+          i === index ? { ...fileItem, format: newFormat } : fileItem
+      );
+      setFiles(updatedFiles);
     };
 
     const clearFiles = () => {
@@ -56,7 +56,13 @@ function Converter() {
     };
 
   const handleDeleteFile = (indexToDelete) => {
-    setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToDelete));
+    setFiles((prevFiles) => {
+      const updatedFiles = prevFiles.filter((_, index) => index !== indexToDelete) 
+      if (updatedFiles.length === 0) {
+        setDownloadUrl(null);
+      }
+      return updatedFiles;
+    });
   };
 
   const closeAlert = () => {

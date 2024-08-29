@@ -54,16 +54,8 @@ export const formats_video = [
     label: "mov",
   },
   {
-    value: "wmv",
-    label: "wmv",
-  },
-  {
     value: "avi",
     label: "avi",
-  },
-  {
-    value: "mkv",
-    label: "mkv",
   },
   {
     value: "flv",
@@ -76,9 +68,5 @@ export const formats_video = [
   {
     value: "mpeg",
     label: "mpeg",
-  },
-  {
-    value: "mpg",
-    label: "mpg",
   },
 ];

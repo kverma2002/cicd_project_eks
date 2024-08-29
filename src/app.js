@@ -7,10 +7,14 @@ const uploadRouter = require('./controllers/upload')
 
 const app = express()
 
+
+
 app.use(cors())
 app.use(express.json())
 
 app.use(middleware.requestLogger)
+
+app.use(express.static('dist'))
 
 app.use('/api/upload', uploadRouter)
 

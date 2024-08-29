@@ -33,7 +33,10 @@ uploadRouter.post('/', upload.array('files'), async (req, res) => {
       files.map(async (file, index) => {
         const outputFilePath = path.join('converted', `${path.parse(file.originalname).name}.${formats[index]}`);
         try {
-
+          console.log('File:', file.originalname);
+          console.log('Mimetype:', file.mimetype);
+          console.log('Output:', outputFilePath);
+          console.log('Format:', formats[index]);
 
           if (file.mimetype.startsWith('video')) {
             await new Promise((resolve, reject) => {

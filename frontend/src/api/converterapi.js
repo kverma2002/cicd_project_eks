@@ -1,9 +1,7 @@
-const BASE_URL = 'http://localhost:3001';
-
 export const uploadFiles = async (formData) => {
 
   try {
-    const response = await fetch(`${BASE_URL}/api/upload`, {
+    const response = await fetch(`/api/upload`, {
       method: 'POST',
       body: formData,
     });
@@ -22,19 +20,3 @@ export const uploadFiles = async (formData) => {
     throw error;
   }
 };
-
-// export const convertFiles = async (fileIds, format) => {
-//   try {
-//     const response = await fetch(`${BASE_URL}/convert`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ fileIds, format }),
-//     });
-//     return await response.json();
-//   } catch (error) {
-//     console.error('Error converting files:', error);
-//     throw error;
-//   }
-// };
