@@ -23,6 +23,15 @@ app.use('/api/upload', createProxyMiddleware({
   changeOrigin: true,
   timeout: 30000, // 30 seconds
   proxyTimeout: 30000,
+  onProxyReq: (proxyReq, req, res) => {
+    // Only works if the body was parsed as JSON, not for multipart
+    if (req.body) {
+      const bodyData = JSON.stringify(req.body);
+      console.log(`Proxy Request Body: ${bodyData}`);
+      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      proxyReq.write(bodyData);
+    }
+  },
   pathRewrite: {
     '^/api/upload': '/api'  // Remove the prefix so the backend sees '/'
   },
