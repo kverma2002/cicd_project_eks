@@ -16,7 +16,7 @@ app.use(middleware.requestLogger)
 
 app.use(express.static('dist'))
 
-app.use('/api', uploadRouter)
+app.use('/', uploadRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
