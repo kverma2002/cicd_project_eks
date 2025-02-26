@@ -1,7 +1,7 @@
 export const uploadFiles = async (formData) => {
 
   try {
-    const response = await fetch(`/api/upload`, {
+    const response = await fetch(`http://localhost:8001/api/upload`, {
       method: 'POST',
       body: formData,
     });
