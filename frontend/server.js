@@ -15,8 +15,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Proxy requests for /api/upload directly to your backend service.
 app.use('/api/upload', createProxyMiddleware({
-  target: 'http://backend-service:8001',
+  target: 'http://devops-backend-service:8001',
   changeOrigin: true,
+  timeout: 30000, // 30 seconds
+  proxyTimeout: 30000
   // Optionally, you can add more configuration options here.
 }));
 
