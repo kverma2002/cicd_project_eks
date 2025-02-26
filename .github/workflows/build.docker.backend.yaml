@@ -1,4 +1,4 @@
-name: Build and Publish Image to DockerHub
+name: Build and Publish Backend Image to DockerHub
 on: 
     [workflow_dispatch]
 jobs:
@@ -8,11 +8,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: build image
-        uses: docker build ./src -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-fileconverter-backend:latest
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      - name: Build and push
+        run: docker build ./src -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-fileconverter-backend:latest
+      - name: push image to docker hub
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest --push .
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-fileconverter-backend:latest
+          echo "Image pushed to Docker Hub"

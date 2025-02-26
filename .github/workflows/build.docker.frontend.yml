@@ -1,0 +1,16 @@
+name: Build and Publish Front End Image to DockerHub
+on: 
+    [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: build image
+        run: docker build ./src -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-fileconverter-frontend:latest
+      - name: push image to docker hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-fileconverter-frontend:latest
+          echo "Image pushed to Docker Hub"
