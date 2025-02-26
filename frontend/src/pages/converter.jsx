@@ -75,7 +75,7 @@ function Converter() {
       <div className="flex-col justify-center dark:bg-slate-950">
           <div className="space-y-6">
             <h1 className="text-center text-2xl md:text-3xl lg:text-4xl md:m-6 lg:m-10 text-gray-900 dark:text-gray-100 px-10 sm:px-6">
-              Your Own File Converter
+              Your Own File Converter!
             </h1>
             <p className="text-center text-sm md:text-base lg:text-lg text-gray-900 dark:text-gray-200 max-w-2xl mx-auto">
               Upload files to convert them to a different format. Supported formats are: <br />
