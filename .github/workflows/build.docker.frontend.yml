@@ -34,5 +34,5 @@ jobs:
         run: |
           kubectl get pods
           kubectl rollout restart deployment/frontend
-          kubeclt get services
+          kubectl get services
           echo "Deployment rollout restarted"

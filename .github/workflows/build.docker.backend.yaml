@@ -33,6 +33,6 @@ jobs:
       - name: Update EKS Deployment
         run: |
           kubectl get pods
-          kubeclt get services
           kubectl rollout restart deployment/backend
+          kubectl get services
           echo "Deployment rollout restarted"
