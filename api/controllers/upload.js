@@ -13,7 +13,8 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 
 uploadRouter.get('/', (req, res) => {
-    res.json('Hello World')
+    console.log('Hello World');
+    res.json('Hello World');
   });
   
 uploadRouter.post('/', upload.array('files'), async (req, res) => {

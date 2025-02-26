@@ -22,8 +22,10 @@ app.use('/api/upload', createProxyMiddleware({
   target: 'http://devops-backend-service:8001',
   changeOrigin: true,
   timeout: 30000, // 30 seconds
-  proxyTimeout: 30000
-  // Optionally, you can add more configuration options here.
+  proxyTimeout: 30000,
+  pathRewrite: {
+    '^/api/upload': '/api'  // Remove the prefix so the backend sees '/'
+  },
 }));
 
 // Catch-all handler to support client-side routing
