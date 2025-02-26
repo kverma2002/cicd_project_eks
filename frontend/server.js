@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 3000;
 // Serve static files from the Vite build
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use('/api/upload', (req, res, next) => {
+  console.log(`Received ${req.method} request on ${req.originalUrl} at ${new Date().toISOString()}`);
+  next();
+});
 
 // Proxy requests for /api/upload directly to your backend service.
 app.use('/api/upload', createProxyMiddleware({
