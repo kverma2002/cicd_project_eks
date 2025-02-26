@@ -33,7 +33,7 @@ app.use('/api/upload', createProxyMiddleware({
     }
   },
   pathRewrite: {
-    '^/api/upload': '/api'  // Remove the prefix so the backend sees '/'
+    '^/api/upload': '/'  // Remove the prefix so the backend sees '/'
   },
 }));
 
