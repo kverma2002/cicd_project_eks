@@ -138,7 +138,7 @@ Now we have the the CI/CD built for creating images, we need to provision the re
 
 The terraform files are in the aws_infra folder and create the architecture below.
 
-[Insert Image Here]
+![yuh drawio](https://github.com/user-attachments/assets/6e07f5ef-22a1-49b2-a860-546ed20ec447)
 
 ## 4. Deploying to EKS
 
@@ -257,7 +257,8 @@ We now need to restructure the app to work in EKS. The first step is to change w
 
 However, when trying this with React, it doesn't work. This is because React runs in the user's browser, not inside the Kubernetes cluster, so the api call to http://devops-backend-service:8001 is coming from the public internet which will not resolve.
 
-[Insert Image]
+![Bruh2 drawio](https://github.com/user-attachments/assets/ffb59394-dc79-4f41-96f9-30f7b24c6107)
+
 
 Instead, we need to proxy these requests so that the frontend can communicate with the backend service. Frameworks like Next.js have built-in API routes that make this process easier, but unfortunately, React does not natively support backend proxies in production builds. We need to introduce an Express server to serve the React app and proxy requests to the backend.
 
@@ -267,7 +268,7 @@ Instead, we need to proxy these requests so that the frontend can communicate wi
 3. Proxy API requests to http://devops-backend-service:8001.
 4. Modify the frontend Dockerfile to use Express instead of Nginx to handle API requests.
 
-[Insert Image]
+![Bruh3 drawio](https://github.com/user-attachments/assets/28b43194-279a-4d38-ab0f-c4a69f307775)
 
 React still runs in the browser, but instead of calling http://devops-backend-service:8001 directly, it calls /api/upload route of the load balancer. The Express server intercepts these requests and proxies them to the backend using Kubernetes' internal DNS. Since Express is inside the cluster, it can resolve http://devops-backend-service:8001, making the API request successfully reach the backend.
 
